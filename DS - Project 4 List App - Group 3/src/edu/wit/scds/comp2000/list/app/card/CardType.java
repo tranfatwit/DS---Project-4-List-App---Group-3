@@ -2,7 +2,7 @@
 package edu.wit.scds.comp2000.list.app.card ;
 
 /**
- * Enumeration for card types in UNO
+ * Enumeration for card types in UNO. Used as a parameter to create a card object
  *
  * @author Fabio Tran
  * @version 1.0.0 2021-11-15 Initial implementation
@@ -10,21 +10,21 @@ package edu.wit.scds.comp2000.list.app.card ;
 public enum CardType
     {
 
-    // Card Type, Display Name
+    // Element, Display Name
     /** number card */
-    NUMBER ( "Number Card" ),
+    NUMBER ( "Number" ),
     /** skip card */
-    SKIP ( "Skip Card" ),
+    SKIP ( "Skip" ),
     /** reverse card */
-    REVERSE ( "Reverse Card" ),
+    REVERSE ( "Reverse" ),
     /** draw-two card */
-    DRAW_TWO ( "Draw-Two Card" ),
+    DRAW_TWO ( "Draw-Two" ),
     /** wild card */
-    WILD ( "Wild Card" ),
+    WILD ( "Wild" ),
     /** draw-four wild card */
-    WILD_DRAW_FOUR ( "Wild Draw-Four Card" );
+    WILD_DRAW_FOUR ( "Wild Draw-Four" );
 
-    /** instance variable to format name for display */
+    /** instance variable to hold formatted display name */
     public final String typeDisplayName ;
 
     /**
@@ -56,12 +56,13 @@ public enum CardType
         {
         // testing toString()
         System.out.println( "Testing toString():" ) ;
-        System.out.println( CardType.NUMBER ) ;
-        System.out.println( CardType.SKIP ) ;
-        System.out.println( CardType.REVERSE ) ;
-        System.out.println( CardType.DRAW_TWO ) ;
-        System.out.println( CardType.WILD ) ;
-        System.out.println( CardType.WILD_DRAW_FOUR ) ;
+        System.out.println( String.format( "NUMBER: %s", CardType.NUMBER ) ) ;
+        System.out.println( String.format( "SKIP: %s", CardType.SKIP ) ) ;
+        System.out.println( String.format( "REVERSE: %s", CardType.REVERSE ) ) ;
+        System.out.println( String.format( "DRAW_TWO: %s", CardType.DRAW_TWO ) ) ;
+        System.out.println( String.format( "WILD: %s", CardType.WILD ) ) ;
+        System.out.println( String.format( "WILD_DRAW_FOUR: %s",
+                                           CardType.WILD_DRAW_FOUR ) ) ;
 
         } // end main()
     }

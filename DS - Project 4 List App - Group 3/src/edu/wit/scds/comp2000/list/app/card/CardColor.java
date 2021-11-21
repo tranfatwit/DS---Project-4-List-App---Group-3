@@ -2,7 +2,8 @@
 package edu.wit.scds.comp2000.list.app.card ;
 
 /**
- * Enumeration for card colors in UNO
+ * Enumeration for card colors in UNO. Used in this program as a parameter to create
+ * a card object
  *
  * @author Fabio Tran
  * @version 1.0.0 2021-11-15 Initial implementation
@@ -11,16 +12,18 @@ public enum CardColor
     {
 
     // Color, Display Name
-    /** red card */
+    /** color red */
     RED ( "Red" ),
-    /** yellow card */
+    /** color yellow */
     YELLOW ( "Yellow" ),
-    /** yellow card */
+    /** color green */
     GREEN ( "Green" ),
-    /** blue card */
-    BLUE ( "Blue" );
+    /** color blue */
+    BLUE ( "Blue" ),
+    /** any color from Red, Yellow, Green, or Blue */
+    ANY ( "Red, Yellow, Green, or Blue" );
 
-    /** instance variable to format name for display */
+    /** instance variable to hold formatted display name */
     public final String colorDisplayName ;
 
     /**
@@ -52,10 +55,11 @@ public enum CardColor
         {
         // testing toString()
         System.out.println( "Testing toString():" ) ;
-        System.out.println( CardColor.RED ) ;
-        System.out.println( CardColor.YELLOW ) ;
-        System.out.println( CardColor.GREEN ) ;
-        System.out.println( CardColor.BLUE ) ;
+        System.out.println( String.format( "RED: %s", CardColor.RED ) ) ;
+        System.out.println( String.format( "YELLOW: %s", CardColor.YELLOW ) ) ;
+        System.out.println( String.format( "GREEN: %s", CardColor.RED ) ) ;
+        System.out.println( String.format( "BLUE: %s", CardColor.BLUE ) ) ;
+        System.out.println( String.format( "ANY: %s", CardColor.ANY ) ) ;
 
         } // end main()
 

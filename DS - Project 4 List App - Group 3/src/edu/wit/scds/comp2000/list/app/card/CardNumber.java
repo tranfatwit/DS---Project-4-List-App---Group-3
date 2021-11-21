@@ -2,7 +2,7 @@
 package edu.wit.scds.comp2000.list.app.card ;
 
 /**
- * Enumeration for card numbers in UNO
+ * Enumeration for card numbers in UNO. Used as a parameter to create a card object
  *
  * @author Fabio Tran
  * @version 1.0.0 2021-11-17 Initial implementation
@@ -10,27 +10,29 @@ package edu.wit.scds.comp2000.list.app.card ;
 public enum CardNumber
     {
 
-    // Card Number, Display Name
+    // Element, Display Name
     /** number zero */
-    ZERO ( "#0" ),
+    ZERO ( "Zero" ),
     /** number one */
-    ONE ( "#1" ),
+    ONE ( "One" ),
     /** number two */
-    TWO ( "#2" ),
+    TWO ( "Two" ),
     /** number three */
-    THREE ( "#3" ),
+    THREE ( "Three" ),
     /** number four */
-    FOUR ( "#4" ),
+    FOUR ( "Four" ),
     /** number five */
-    FIVE ( "#5" ),
+    FIVE ( "Five" ),
     /** number six */
-    SIX ( "#6" ),
+    SIX ( "Six" ),
     /** number seven */
-    SEVEN ( "#7" ),
+    SEVEN ( "Seven" ),
     /** number eight */
-    EIGHT ( "#8" ),
+    EIGHT ( "Eight" ),
     /** number nine */
-    NINE ( "#9" );
+    NINE ( "Nine" ),
+    /** no number for cards such as Wild Card */
+    NONE ( "" );
 
     /** instance variable to hold formatted display name */
     public final String numberDisplayName ;
@@ -51,7 +53,7 @@ public enum CardNumber
         {
         return this.numberDisplayName ;
 
-        }   // end method toString()
+        }   // end toString()
 
 
     /**
@@ -64,16 +66,17 @@ public enum CardNumber
         {
         // testing toString()
         System.out.println( "Testing toString():" ) ;
-        System.out.println( CardNumber.ZERO ) ;
-        System.out.println( CardNumber.ONE ) ;
-        System.out.println( CardNumber.TWO ) ;
-        System.out.println( CardNumber.THREE ) ;
-        System.out.println( CardNumber.FOUR ) ;
-        System.out.println( CardNumber.FIVE ) ;
-        System.out.println( CardNumber.SIX ) ;
-        System.out.println( CardNumber.SEVEN ) ;
-        System.out.println( CardNumber.EIGHT ) ;
-        System.out.println( CardNumber.NINE ) ;
+        System.out.println( String.format( "ZERO: %s", CardNumber.ZERO ) ) ;
+        System.out.println( String.format( "ONE: %s", CardNumber.ONE ) ) ;
+        System.out.println( String.format( "TWO: %s", CardNumber.TWO ) ) ;
+        System.out.println( String.format( "THREE: %s", CardNumber.THREE ) ) ;
+        System.out.println( String.format( "FOUR: %s", CardNumber.FOUR ) ) ;
+        System.out.println( String.format( "FIVE: %s", CardNumber.FIVE ) ) ;
+        System.out.println( String.format( "SIX: %s", CardNumber.SIX ) ) ;
+        System.out.println( String.format( "SEVEN: %s", CardNumber.SEVEN ) ) ;
+        System.out.println( String.format( "EIGHT: %s", CardNumber.EIGHT ) ) ;
+        System.out.println( String.format( "NINE: %s", CardNumber.NINE ) ) ;
+        System.out.println( String.format( "NONE: %s", CardNumber.NONE ) ) ;
 
         } // end main()
 
