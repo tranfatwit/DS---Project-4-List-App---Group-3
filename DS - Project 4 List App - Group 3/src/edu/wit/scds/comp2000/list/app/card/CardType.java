@@ -13,12 +13,12 @@ public enum CardType
     // Element, Display Name
     /** number card */
     NUMBER ( "Number" ),
-    /** skip card */
-    SKIP ( "Skip" ),
-    /** reverse card */
-    REVERSE ( "Reverse" ),
     /** draw-two card */
     DRAW_TWO ( "Draw-Two" ),
+    /** reverse card */
+    REVERSE ( "Reverse" ),
+    /** skip card */
+    SKIP ( "Skip" ),
     /** wild card */
     WILD ( "Wild" ),
     /** draw-four wild card */
@@ -57,9 +57,9 @@ public enum CardType
         // testing toString()
         System.out.println( "Testing toString():" ) ;
         System.out.println( String.format( "NUMBER: %s", CardType.NUMBER ) ) ;
-        System.out.println( String.format( "SKIP: %s", CardType.SKIP ) ) ;
-        System.out.println( String.format( "REVERSE: %s", CardType.REVERSE ) ) ;
         System.out.println( String.format( "DRAW_TWO: %s", CardType.DRAW_TWO ) ) ;
+        System.out.println( String.format( "REVERSE: %s", CardType.REVERSE ) ) ;
+        System.out.println( String.format( "SKIP: %s", CardType.SKIP ) ) ;
         System.out.println( String.format( "WILD: %s", CardType.WILD ) ) ;
         System.out.println( String.format( "WILD_DRAW_FOUR: %s",
                                            CardType.WILD_DRAW_FOUR ) ) ;

@@ -50,7 +50,7 @@ public class Card implements Comparable<Card>
     public void setColorForWild( CardColor color )
         {
         this.wildColor = color ;
-        
+
         } // end setColorForWild()
 
 
@@ -200,6 +200,14 @@ public class Card implements Comparable<Card>
         System.out.println( "anotherRedOne" ) ;
         Card redTwo = new Card( CardColor.RED, CardNumber.TWO, CardType.NUMBER ) ;
         System.out.println( "redTWO" ) ;
+        Card blueDrawTwo = new Card( CardColor.BLUE,
+                                     CardNumber.NONE,
+                                     CardType.DRAW_TWO ) ;
+        System.out.println( "blueDrawTwo" ) ;
+        Card greenReverse = new Card( CardColor.GREEN,
+                                      CardNumber.NONE,
+                                      CardType.REVERSE ) ;
+        System.out.println( "greenReverse" ) ;
         Card yellowSkip = new Card( CardColor.YELLOW,
                                     CardNumber.NONE,
                                     CardType.SKIP ) ;
@@ -208,14 +216,6 @@ public class Card implements Comparable<Card>
                                    CardNumber.NONE,
                                    CardType.SKIP ) ;
         System.out.println( "greenSkip" ) ;
-        Card greenReverse = new Card( CardColor.GREEN,
-                                      CardNumber.NONE,
-                                      CardType.REVERSE ) ;
-        System.out.println( "greenReverse" ) ;
-        Card blueDrawTwo = new Card( CardColor.BLUE,
-                                     CardNumber.NONE,
-                                     CardType.DRAW_TWO ) ;
-        System.out.println( "blueDrawTwo" ) ;
         Card wild = new Card( CardColor.ANY, CardNumber.NONE, CardType.WILD ) ;
         System.out.println( "wild" ) ;
         Card wildDrawFour = new Card( CardColor.ANY,
