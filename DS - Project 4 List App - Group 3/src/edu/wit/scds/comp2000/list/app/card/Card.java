@@ -315,110 +315,77 @@ public class Card implements Comparable<Card>
         final CardNumber[] numbers = CardNumber.values() ;
         final CardType[] types = CardType.values() ;
 
-        // creating numbered cards
+        // Creating and printing deck
         for ( CardColor color : colors )
             {
+            // condition to check for and print wild cards
             if ( color.equals( CardColor.ANY ) )
                 {
+                for ( CardType type : types )
+                    {
+                    if ( type.equals( CardType.WILD ) ||
+                         type.equals( CardType.WILD_DRAW_FOUR ) )
+                        {
+                        for ( int i = 0 ; i < 4 ; i++ )
+                            {
+                            Card newCard = new Card( color, CardNumber.NONE, type ) ;
+                            System.out.println( newCard ) ;
+                            deck.add( newCard ) ;
+                            } // end for
+
+                        } // end if
+
+                    } // end for
                 continue ;
                 } // end if
 
             for ( CardNumber number : numbers )
                 {
+                // condition to check for and print action cards
                 if ( number.equals( CardNumber.NONE ) )
                     {
+                    for ( CardType type : types )
+                        {
+                        if ( type.equals( CardType.DRAW_TWO ) ||
+                             type.equals( CardType.REVERSE ) ||
+                             type.equals( CardType.SKIP ) )
+                            {
+                            for ( int i = 0 ; i < 2 ; i++ )
+                                {
+                                Card newCard = new Card( color,
+                                                         CardNumber.NONE,
+                                                         type ) ;
+                                System.out.println( newCard ) ;
+                                deck.add( newCard ) ;
+                                } // end for
+
+                            } // end if
+
+                        } // end for
                     continue ;
                     } // end if
-
+                // by process of elimination only type left are number cards
                 if ( number.equals( CardNumber.ZERO ) )
                     {
                     Card newCard = new Card( color, number, CardType.NUMBER ) ;
                     System.out.println( newCard ) ;
-
                     deck.add( newCard ) ;
-
                     continue ;
                     } // end if
 
                 for ( int i = 0 ; i < 2 ; i++ )
                     {
-
                     Card newCard = new Card( color, number, CardType.NUMBER ) ;
                     System.out.println( newCard ) ;
-
                     deck.add( newCard ) ;
                     } // end for
 
                 } // end for
 
             } // end for
-
-        // creating action cards
-        for ( CardColor color : colors )
-            {
-            if ( color.equals( CardColor.ANY ) )
-                {
-                continue ;
-                } // end if
-
-            for ( CardNumber number : numbers )
-                {
-                if ( !number.equals( CardNumber.NONE ) )
-                    {
-                    continue ;
-                    } // end if
-
-                for ( CardType type : types )
-                    {
-                    if ( type.equals( CardType.NUMBER ) ||
-                         type.equals( CardType.WILD ) ||
-                         type.equals( CardType.WILD_DRAW_FOUR ) )
-                        {
-                        continue ;
-                        } // end if
-
-                    for ( int i = 0 ; i < 2 ; i++ )
-                        {
-                        Card newCard = new Card( color, CardNumber.NONE, type ) ;
-                        System.out.println( newCard ) ;
-
-                        deck.add( newCard ) ;
-                        } // end for
-
-                    } // end for
-
-                } // end for
-
-            }
-
-        // creating wild cards
-        for ( CardColor color : colors )
-            {
-            if ( !color.equals( CardColor.ANY ) )
-                {
-                continue ;
-                } // end if
-            for ( CardType type : types )
-                {
-                if ( type.equals( CardType.NUMBER ) ||
-                     type.equals( CardType.SKIP ) ||
-                     type.equals( CardType.REVERSE ) ||
-                     type.equals( CardType.DRAW_TWO ) )
-                    {
-                    continue ;
-                    } // end if
-
-                for ( int i = 0 ; i < 4 ; i++ )
-                    {
-                    Card newCard = new Card( color, CardNumber.NONE, type ) ;
-                    System.out.println( newCard ) ;
-
-                    deck.add( newCard ) ;
-                    } // end for
-
-                } // end for
-
-            } // end for
+        System.out.println() ;
+        System.out.println( String.format( "Total cards: %s", deck.size() ) ) ; // printing
+                                                                                // total
 
         } // end main()
 
