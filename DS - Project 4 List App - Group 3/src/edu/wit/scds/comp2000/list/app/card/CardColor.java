@@ -20,8 +20,8 @@ public enum CardColor
     GREEN ( "Green" ),
     /** color blue */
     BLUE ( "Blue" ),
-    /** any color from Red, Yellow, Green, or Blue */
-    ANY ( "Red, Yellow, Green, or Blue" );
+    /** wild which means any color from red, yellow, green, or blue */
+    WILD ( "Wild" );
 
     /** instance variable to hold formatted display name */
     public final String colorDisplayName ;
@@ -59,7 +59,7 @@ public enum CardColor
         System.out.println( String.format( "YELLOW: %s", CardColor.YELLOW ) ) ;
         System.out.println( String.format( "GREEN: %s", CardColor.RED ) ) ;
         System.out.println( String.format( "BLUE: %s", CardColor.BLUE ) ) ;
-        System.out.println( String.format( "ANY: %s", CardColor.ANY ) ) ;
+        System.out.println( String.format( "WILD: %s", CardColor.WILD ) ) ;
 
         } // end main()
 

@@ -11,8 +11,26 @@ public enum CardType
     {
 
     // Element, Display Name
-    /** number card */
-    NUMBER ( "Number" ),
+    /** number zero */
+    ZERO ( "Zero" ),
+    /** number one */
+    ONE ( "One" ),
+    /** number two */
+    TWO ( "Two" ),
+    /** number three */
+    THREE ( "Three" ),
+    /** number four */
+    FOUR ( "Four" ),
+    /** number five */
+    FIVE ( "Five" ),
+    /** number six */
+    SIX ( "Six" ),
+    /** number seven */
+    SEVEN ( "Seven" ),
+    /** number eight */
+    EIGHT ( "Eight" ),
+    /** number nine */
+    NINE ( "Nine" ),
     /** draw-two card */
     DRAW_TWO ( "Draw-Two" ),
     /** reverse card */
@@ -56,7 +74,16 @@ public enum CardType
         {
         // testing toString()
         System.out.println( "Testing toString():" ) ;
-        System.out.println( String.format( "NUMBER: %s", CardType.NUMBER ) ) ;
+        System.out.println( String.format( "ZERO: %s", CardType.ZERO ) ) ;
+        System.out.println( String.format( "ONE: %s", CardType.ONE ) ) ;
+        System.out.println( String.format( "TWO: %s", CardType.TWO ) ) ;
+        System.out.println( String.format( "THREE: %s", CardType.THREE ) ) ;
+        System.out.println( String.format( "FOUR: %s", CardType.FOUR ) ) ;
+        System.out.println( String.format( "FIVE: %s", CardType.FIVE ) ) ;
+        System.out.println( String.format( "SIX: %s", CardType.SIX ) ) ;
+        System.out.println( String.format( "SEVEN: %s", CardType.SEVEN ) ) ;
+        System.out.println( String.format( "EIGHT: %s", CardType.EIGHT ) ) ;
+        System.out.println( String.format( "NINE: %s", CardType.NINE ) ) ;
         System.out.println( String.format( "DRAW_TWO: %s", CardType.DRAW_TWO ) ) ;
         System.out.println( String.format( "REVERSE: %s", CardType.REVERSE ) ) ;
         System.out.println( String.format( "SKIP: %s", CardType.SKIP ) ) ;
