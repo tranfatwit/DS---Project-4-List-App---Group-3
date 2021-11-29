@@ -1,28 +1,24 @@
-package edu.wit.scds.comp2000.list.app.pile;
 
-import java.util.Stack ;
+package edu.wit.scds.comp2000.list.app.pile ;
 
 /**
- * 
- *
- * @author tranf
+ * @author Fabio Tran
  * @version 1.0.0 2021-11-18 Initial implementation
- *
  */
-public class Deck
+public class Deck extends Pile
     {
 
     /**
-     * 
+     * Used for testing
      *
      * @param args
+     *     unused
      */
     public static void main( String[] args )
         {
-        // TODO Auto-generated method stub
-        Stack deck = new Stack();
-        
+        // TODO test
+
         }
 
     }
-	// end class Deck
+// end class Deck
