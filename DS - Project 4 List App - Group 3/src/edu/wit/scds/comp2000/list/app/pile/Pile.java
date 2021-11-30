@@ -62,17 +62,13 @@ public class Pile
     /**
      * Searches for a card in the pile
      *
-     * @return card
+     * @return index of card in the pile
      */
-    protected int search(Card card)
+    protected int search( Card card )
         {
-        // TODO finish implementing
-        return 0;
-        //for (Card card : this.pile) {
-        //}
-        //} 
-      
-        } // end search() 
+        return this.pile.indexOf( card ) ;
+
+        } // end search()
 
 
     /**
@@ -90,34 +86,30 @@ public class Pile
      */
     protected void sort()
         {
-        // TODO implement 
-        }
+        Collections.sort( this.pile ) ;
+
+        } // end sort()
 
 
-    /**
-     * Displays all cards in pile in string format
-     *
-     * @return string of all cards in pile
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
      */
-    protected String displayCards()
-        {
-        String result = "" ;
-
-        for ( Card card : this.pile )
-            {
-            result += card.toString() ;
-            } // end for
-
-        return result ;
-
-        } // end displayCards()
-
-
     @Override
     public String toString()
         {
-        return "" ;
-        }
+        // stores string display name of cards in a list to be separated with commas
+        // using String.join
+        List<String> results = new ArrayList<>( 108 ) ;
+
+        for ( Card card : this.pile )
+            {
+            results.add( card.toString() ) ;
+            } // end for
+
+        return String.join( ", ", results ) ;
+
+        } // end toString()
 
 
     /**
@@ -128,7 +120,7 @@ public class Pile
      */
     public static void main( String[] args )
         {
-        // creating instances of Card
+        // creating cards
         System.out.println( "Creating cards:" ) ;
         Card redOne = new Card( CardColor.RED, CardType.ONE ) ;
         System.out.println( "redOne" ) ;
@@ -138,12 +130,66 @@ public class Pile
         System.out.println( "blueReverse" ) ;
         Card yellowReverse = new Card( CardColor.YELLOW, CardType.REVERSE ) ;
         System.out.println( "yellowReverse" ) ;
-        Card wildCard = new Card( CardColor.WILD, CardType.WILD_DRAW_FOUR ) ;
+        Card wildCard = new Card( CardColor.WILD, CardType.WILD ) ;
         System.out.println( "wildCard" ) ;
         System.out.println() ;
 
+        // creating pile
+        System.out.println( "Creaing pile:" ) ;
         Pile pile = new Pile() ;
-        pile.displayCards() ;
+        System.out.println() ;
+
+        // testing add()
+        System.out.println( "Testing add():" ) ;
+        System.out.println( "Adding redOne" ) ;
+        pile.addCard( redOne ) ;
+        System.out.println( "Adding anotherRedOne" ) ;
+        pile.addCard( anotherRedOne ) ;
+        System.out.println( "Adding wildCard" ) ;
+        pile.addCard( wildCard ) ;
+        System.out.println( String.format( "Cards in pile: %s", pile.toString() ) ) ;
+        System.out.println() ;
+
+        // testing remove()
+        System.out.println( "Testing remove():" ) ;
+        System.out.println( "Removing redOne" ) ;
+        pile.removeCard( redOne ) ;
+        System.out.println( "Removing anotherRedOne" ) ;
+        pile.removeCard( anotherRedOne ) ;
+        System.out.println( "Removing wildCard" ) ;
+        pile.removeCard( wildCard ) ;
+        System.out.println( String.format( "Cards in pile: %s", pile.toString() ) ) ;
+        System.out.println() ;
+
+        // testing search()
+        System.out.println( "Testing search():" ) ;
+        pile.addCard( redOne ) ;
+        pile.addCard( wildCard ) ;
+        System.out.println( String.format( "Searching for redOne: %s",
+                                           pile.search( redOne ) ) ) ;
+        System.out.println( String.format( "Searching for wildCard: %s",
+                                           pile.search( wildCard ) ) ) ;
+        System.out.println() ;
+
+        // testing shuffle()
+        System.out.println( "Testing shuffle():" ) ;
+        pile.addCard( yellowReverse ) ;
+        pile.addCard( blueReverse ) ;
+        System.out.println( String.format( "Cards in pile before shuffle: %s",
+                                           pile.toString() ) ) ;
+        pile.shuffle() ;
+        System.out.println( String.format( "Cards in pile after shuffle: %s",
+                                           pile.toString() ) ) ;
+
+        // testing sort()
+        System.out.println( "Testing sort()" ) ;
+        System.out.println( String.format( "Cards in pile before sort %s: ",
+                                           pile.toString() ) ) ;
+        pile.sort() ;
+        System.out.println( String.format( "Cards in pile after sort: %s",
+                                           pile.toString() ) ) ;
+
+        // testing toString()
 
         } // end main()
 
