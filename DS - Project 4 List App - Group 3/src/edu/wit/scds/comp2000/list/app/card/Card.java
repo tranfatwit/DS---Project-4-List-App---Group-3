@@ -12,9 +12,10 @@ import java.util.Objects ;
 public class Card implements Comparable<Card>
     {
 
-    /** holds card color and type */
-    public final CardColor color ;
-    public final CardType type ;
+    /** holds card color */
+    private final CardColor color ;
+    /** holds card type */
+    private final CardType type ;
 
     /**
      * 2-arg constructor that takes in color and type of uno card
@@ -30,6 +31,30 @@ public class Card implements Comparable<Card>
         this.type = type ;
 
         } // end 2-arg constructor
+
+
+    /**
+     * Retrieves color of card
+     *
+     * @return color of card
+     */
+    public CardColor getColor()
+        {
+        return this.color ;
+
+        } // end getColor()
+
+
+    /**
+     * Retrieves type of card
+     *
+     * @return type of card
+     */
+    public CardType getType()
+        {
+        return this.type ;
+
+        } // end getType()
 
 
     /*
@@ -132,6 +157,20 @@ public class Card implements Comparable<Card>
         System.out.println( "wildCard" ) ;
         System.out.println() ;
 
+        // testing getColor()
+        System.out.println( "Testing getColor()" ) ;
+        System.out.println( String.format( "redOne: %s", redOne.getColor() ) ) ;
+        System.out.println( String.format( "blueReverse: %s", blueReverse.getColor() ) ) ;
+        System.out.println( String.format( "wildCard: %s", wildCard.getColor() ) ) ;
+        System.out.println(  ) ;
+        
+        // testing getType()
+        System.out.println( "Testing getType()" ) ;
+        System.out.println( String.format( "redOne: %s", redOne.getType() ) ) ;
+        System.out.println( String.format( "blueReverse: %s", blueReverse.getType() ) ) ;
+        System.out.println( String.format( "wildCard: %s", wildCard.getType() ) ) ;
+        System.out.println() ;
+
         // testing compareTo()
         System.out.println( "Testing compareTo()" ) ;
         System.out.println( String.format( "redOne compared to anotherRedOne: %s",
@@ -172,7 +211,7 @@ public class Card implements Comparable<Card>
         System.out.println( String.format( "yellowReverse: %s", yellowReverse ) ) ;
         System.out.println( String.format( "wildCard: %s", wildCard ) ) ;
         System.out.println() ;
-        
+
         } // end main()
     }
 // end class Card

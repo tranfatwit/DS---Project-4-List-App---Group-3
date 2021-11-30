@@ -1,19 +1,14 @@
-package edu.wit.scds.comp2000.list.app.pile;
 
+package edu.wit.scds.comp2000.list.app.pile ;
 
 /**
- * 
- *
  * @author Fabio Tran
  * @version 1.0.0 2021-11-18 Initial implementation
- *
  */
-public class Hand extends Pile 
+public class Hand extends Pile
     {
 
     /**
-     * 
-     *
      * @param args
      */
     public static void main( String[] args )
@@ -23,4 +18,4 @@ public class Hand extends Pile
         }
 
     }
-	// end class Hand
+// end class Hand
