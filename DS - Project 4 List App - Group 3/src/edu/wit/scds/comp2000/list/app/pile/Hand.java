@@ -4,11 +4,11 @@ package edu.wit.scds.comp2000.list.app.pile;
 /**
  * 
  *
- * @author tranf
+ * @author Fabio Tran
  * @version 1.0.0 2021-11-18 Initial implementation
  *
  */
-public class Hand
+public class Hand extends Pile 
     {
 
     /**
