@@ -189,8 +189,6 @@ public class Pile
         System.out.println( String.format( "Cards in pile after sort: %s",
                                            pile.toString() ) ) ;
 
-        // testing toString()
-
         } // end main()
 
     }
