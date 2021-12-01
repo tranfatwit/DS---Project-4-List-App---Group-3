@@ -7,7 +7,6 @@ import edu.wit.scds.comp2000.list.app.card.CardType ;
 
 import java.util.ArrayList ;
 import java.util.List ;
-import java.util.Stack ;
 
 /**
  * Class to create a Deck of UNO cards
@@ -17,12 +16,6 @@ import java.util.Stack ;
  */
 public class Deck extends Pile
     {
-
-    /**
-     * Used to store cards played by players, top card of the stack will be used to
-     * determine what cards can be played next
-     */
-    private final Stack<Card> discardPile = new Stack<>() ;
 
     /**
      * no-arg constructor
@@ -81,61 +74,44 @@ public class Deck extends Pile
 
 
     /**
-     * Deals the player one card from the deck
+     * Deals the player one card from the deck using unspecified remove from
+     * superclass. Renamed just for clarity purposes
      *
      * @return card to be dealt
      */
     public Card deal()
         {
-        return super.pile.remove( 0 ) ;
+        return super.removeCard() ;
 
         } // end deal()
 
 
     /**
-     * Discards a card to the discard pile
+     * Re-shuffles the deck once it runs out of cards with every card from discard
+     * pile except top card
+     *
+     * @param discardPile
+     *     discard pile to be re-shuffled into deck
      */
-    public void discardCard( Card card )
+    public void reshuffle( DiscardPile discardPile )
         {
-        this.discardPile.push( card ) ;
-
-        } // end discardCard()
-
-
-    /**
-     * Re-shuffles the deck once it runs out of cards
-     */
-    public void reshuffle()
-        {
-        // sets aside top card of discard pile
-        Card lastPlayed = this.discardPile.pop() ;
-
-        // sends rest of the cards back to the deck
-        while ( !this.discardPile.isEmpty() )
+        // stores last played and removes it so it doesn't get shuffle back into deck
+        Card lastPlayed = discardPile.getLastPlayed() ;
+        discardPile.removeCard(lastPlayed);
+    
+        // adds each card from discard pile back into the deck
+        while ( !discardPile.pile.isEmpty() )
             {
-            super.pile.add( this.discardPile.pop() ) ;
+            super.pile.add( discardPile.removeCard() ) ;
             } // end while
 
-        // shuffles deck
+        // returns last played to discard pile
+        discardPile.addCard( lastPlayed ) ;
+
+        // shuffle deck
         super.shuffle() ;
 
-        // returns last played to the discard pile
-        this.discardPile.push( lastPlayed ) ;
-
         } // end reshuffle()
-
-
-    /**
-     * Returns last card that was played which is the card on top of discard pile
-     * stack
-     *
-     * @return card that was last played
-     */
-    public Card lastPlayed()
-        {
-        return this.discardPile.peek() ;
-
-        } // end lastPlayed()
 
 
     /*
@@ -171,6 +147,8 @@ public class Deck extends Pile
         System.out.println( "Creating Deck of Uno:" ) ;
         Deck unoDeck = new Deck() ;
         System.out.println( unoDeck.toString() ) ;
+        System.out.println( String.format( "Number of cards: %s",
+                                           unoDeck.pile.size() ) ) ;
         System.out.println() ;
 
         // testing deal()
@@ -180,42 +158,34 @@ public class Deck extends Pile
         System.out.println( "Dealing card" ) ;
         unoDeck.deal() ;
         System.out.println( unoDeck.toString() ) ;
-        System.out.println() ;
-
-        // testing discard()
-        System.out.println( "Testing discard():" ) ;
-        Card card1 = unoDeck.deal() ;
-        System.out.println( "Discarding" ) ;
-        unoDeck.discardCard( card1 ) ;
-        Card card2 = unoDeck.deal() ;
-        System.out.println( "Discarding" ) ;
-        unoDeck.discardCard( card2 ) ;
-        System.out.println( String.format( "Last played: %s",
-                                           unoDeck.lastPlayed() ) ) ;
-        System.out.println( String.format( "# of cards discarded: %s",
-                                           unoDeck.discardPile.size() ) ) ;
-        System.out.println() ;
-
-        // testing lastPlayed()
-        System.out.println( "Testing lastPlayed():" ) ;
-        Card card3 = unoDeck.deal() ;
-        System.out.println( String.format( "Discarding %s", card3.toString() ) ) ;
-        unoDeck.discardCard( card3 ) ;
-        System.out.println( String.format( "Last played: %s",
-                                           unoDeck.lastPlayed() ) ) ;
+        System.out.println( String.format( "Number of cards: %s",
+                                           unoDeck.pile.size() ) ) ;
         System.out.println() ;
 
         // testing reshuffle()
-        System.out.println( "Testing reshuffle" ) ;
+        System.out.println( "Testing reshuffle():" ) ;
+        System.out.println( "Creating Discard Pile" ) ;
+        DiscardPile discardPile = new DiscardPile() ;
+        
         System.out.println( "Emptying deck" ) ;
         while ( !unoDeck.pile.isEmpty() )
             {
-            unoDeck.discardCard( unoDeck.deal() ) ;
-            }
+            discardPile.addCard( unoDeck.deal() ) ;
+            } // end while
         System.out.println( unoDeck.toString() ) ;
+        System.out.println( String.format( "Number of cards in deck: %s",
+                                           unoDeck.pile.size() ) ) ;
+        System.out.println( discardPile.toString() ) ;
+        System.out.println( String.format( "Number of cards in discard pile: %s",
+                                           discardPile.pile.size() ) ) ;
         System.out.println( "Reshuffling" ) ;
-        unoDeck.reshuffle() ;
+        unoDeck.reshuffle( discardPile ) ;
         System.out.println( unoDeck.toString() ) ;
+        System.out.println( String.format( "Number of cards in deck: %s",
+                                           unoDeck.pile.size() ) ) ;
+        System.out.println( discardPile.toString() ) ;
+        System.out.println( String.format( "Number of cards in discard pile: %s",
+                                           discardPile.pile.size() ) ) ;
 
         } // end main()
 

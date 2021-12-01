@@ -126,11 +126,11 @@ public class Player
         System.out.println( "Testing getHand()" ) ;
         Card redOne = new Card( CardColor.RED, CardType.ONE ) ;
         System.out.println( "player1 receiving redOne" ) ;
-        player1.getHand().receiveCard( redOne ) ;
+        player1.getHand().addCard( redOne ) ;
         System.out.println( "player2 receiving redOne" ) ;
-        player2.getHand().receiveCard( redOne ) ;
+        player2.getHand().addCard( redOne ) ;
         System.out.println( "player3 receiving redOne" ) ;
-        player3.getHand().receiveCard( redOne ) ;
+        player3.getHand().addCard( redOne ) ;
         System.out.println( String.format( "player1's hand: %s",
                                            player1.getHand() ) ) ;
         System.out.println( String.format( "player2's hand: %s",

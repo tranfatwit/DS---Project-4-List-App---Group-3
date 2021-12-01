@@ -38,7 +38,7 @@ public class Pile
      * @param card
      *     card to add
      */
-    protected void addCard( Card card )
+    public void addCard( Card card )
         {
         this.pile.add( card ) ;
 
@@ -50,35 +50,12 @@ public class Pile
      *
      * @param card
      *     card to remove
-     * @return
      */
-    protected void removeCard( Card card )
+    public void removeCard( Card card )
         {
         this.pile.remove( card ) ;
 
         } // end removeCard()
-
-
-    /**
-     * Searches for a card in the pile
-     *
-     * @return index of card in the pile
-     */
-    public int search( Card card )
-        {
-        return this.pile.indexOf( card ) ;
-
-        } // end search()
-
-
-    /**
-     * Sorts pile of cards
-     */
-    public void sort()
-        {
-        Collections.sort( this.pile ) ;
-
-        } // end sort()
 
 
     /**
@@ -89,6 +66,40 @@ public class Pile
         Collections.shuffle( this.pile ) ;
 
         } // end shuffle()
+
+
+    /**
+     * Unspecified removal of card from the pile used only by deck class 
+     *
+     * @return card removed
+     */
+    protected Card removeCard()
+        {
+        return this.pile.remove( 0 ) ;
+
+        } // end remove()
+
+
+    /**
+     * Searches for a card in the pile (for debugging)
+     *
+     * @return index of card in the pile
+     */
+    protected int search( Card card )
+        {
+        return this.pile.indexOf( card ) ;
+
+        } // end search()
+
+
+    /**
+     * Sorts pile of cards (for debugging)
+     */
+    protected void sort()
+        {
+        Collections.sort( this.pile ) ;
+
+        } // end sort()
 
 
     /*
@@ -183,7 +194,7 @@ public class Pile
 
         // testing sort()
         System.out.println( "Testing sort()" ) ;
-        System.out.println( String.format( "Cards in pile before sort %s: ",
+        System.out.println( String.format( "Cards in pile before sort: %s: ",
                                            pile.toString() ) ) ;
         pile.sort() ;
         System.out.println( String.format( "Cards in pile after sort: %s",

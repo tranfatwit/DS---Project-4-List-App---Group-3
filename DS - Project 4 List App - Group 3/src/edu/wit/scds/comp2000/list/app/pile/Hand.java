@@ -21,31 +21,6 @@ public class Hand extends Pile
         super() ;
         }
 
-
-    /**
-     * Receives a card and stores it in pile
-     *
-     * @param card
-     *     card to add to pile
-     */
-    public void receiveCard( Card card )
-        {
-        super.addCard( card ) ;
-        } // end receiveCard()
-
-
-    /**
-     * Removes a card that is played by the player from the hand pile
-     *
-     * @param card
-     *     card to be removed from hand pile
-     */
-    public void playCard( Card card )
-        {
-        super.removeCard( card ) ;
-        } // end playCard()
-
-
     /**
      * returns the hand as a string in format "[x, y, z]
      */
@@ -60,7 +35,6 @@ public class Hand extends Pile
         return ret + this.pile.get( this.pile.size() - 1 ) + "]" ;
 
         }
-
 
     /**
      * used for testing

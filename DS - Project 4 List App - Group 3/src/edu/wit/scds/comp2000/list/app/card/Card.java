@@ -153,21 +153,23 @@ public class Card implements Comparable<Card>
         System.out.println( "blueReverse" ) ;
         Card yellowReverse = new Card( CardColor.YELLOW, CardType.REVERSE ) ;
         System.out.println( "yellowReverse" ) ;
-        Card wildCard = new Card( CardColor.WILD, CardType.WILD_DRAW_FOUR ) ;
+        Card wildCard = new Card( CardColor.WILD, CardType.WILD ) ;
         System.out.println( "wildCard" ) ;
         System.out.println() ;
 
         // testing getColor()
         System.out.println( "Testing getColor()" ) ;
         System.out.println( String.format( "redOne: %s", redOne.getColor() ) ) ;
-        System.out.println( String.format( "blueReverse: %s", blueReverse.getColor() ) ) ;
+        System.out.println( String.format( "blueReverse: %s",
+                                           blueReverse.getColor() ) ) ;
         System.out.println( String.format( "wildCard: %s", wildCard.getColor() ) ) ;
-        System.out.println(  ) ;
-        
+        System.out.println() ;
+
         // testing getType()
         System.out.println( "Testing getType()" ) ;
         System.out.println( String.format( "redOne: %s", redOne.getType() ) ) ;
-        System.out.println( String.format( "blueReverse: %s", blueReverse.getType() ) ) ;
+        System.out.println( String.format( "blueReverse: %s",
+                                           blueReverse.getType() ) ) ;
         System.out.println( String.format( "wildCard: %s", wildCard.getType() ) ) ;
         System.out.println() ;
 
