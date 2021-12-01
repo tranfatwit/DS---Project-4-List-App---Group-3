@@ -27,7 +27,7 @@ public class Deck extends Pile
     /**
      * no-arg constructor
      */
-    private Deck()
+    public Deck()
         {
         for ( CardColor color : CardColor.values() )
             {
@@ -77,9 +77,6 @@ public class Deck extends Pile
 
             } // end for
 
-        // shuffles deck
-        super.shuffle() ;
-
         } // end deck()
 
 
@@ -90,20 +87,19 @@ public class Deck extends Pile
      */
     public Card deal()
         {
-        // TODO test
         return super.pile.remove( 0 ) ;
 
         } // end deal()
 
 
     /**
-     * Adds a card to the discard pile
+     * Sends a card to the discard pile
      */
-    public void discard( Card card )
+    public void sendToDiscardPile( Card card )
         {
         this.discardPile.push( card ) ;
 
-        } // end discard()
+        } // end sendToDiscardPile()
 
 
     /**
@@ -126,7 +122,7 @@ public class Deck extends Pile
         // returns last played to the discard pile
         this.discardPile.push( lastPlayed ) ;
 
-        } // end re=shuffle()
+        } // end reshuffle()
 
 
     /**

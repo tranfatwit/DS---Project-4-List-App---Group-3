@@ -64,7 +64,7 @@ public class Pile
      *
      * @return index of card in the pile
      */
-    protected int search( Card card )
+    public int search( Card card )
         {
         return this.pile.indexOf( card ) ;
 
@@ -72,23 +72,23 @@ public class Pile
 
 
     /**
-     * Shuffles pile of cards
-     */
-    protected void shuffle()
-        {
-        Collections.shuffle( this.pile ) ;
-
-        } // end shuffle()
-
-
-    /**
      * Sorts pile of cards
      */
-    protected void sort()
+    public void sort()
         {
         Collections.sort( this.pile ) ;
 
         } // end sort()
+
+
+    /**
+     * Shuffles pile of cards
+     */
+    public void shuffle()
+        {
+        Collections.shuffle( this.pile ) ;
+
+        } // end shuffle()
 
 
     /*

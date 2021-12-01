@@ -12,8 +12,6 @@ import edu.wit.scds.comp2000.list.app.card.CardType ;
 public class Hand extends Pile
     {
 
-    // private final Pile hand ;
-
     /**
      * no-arg constructor a players hand at the start of the game will always be
      * zero, since cards have not been dealt
