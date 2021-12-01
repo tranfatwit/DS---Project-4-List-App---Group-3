@@ -77,6 +77,9 @@ public class Deck extends Pile
 
             } // end for
 
+        // shuffles deck
+        super.shuffle() ;
+
         } // end deck()
 
 
@@ -130,7 +133,7 @@ public class Deck extends Pile
      * Returns last card that was played which is the card on top of discard pile
      * stack
      *
-     * @return
+     * @return card that was last played
      */
     public Card lastPlayed()
         {
@@ -168,7 +171,6 @@ public class Deck extends Pile
      */
     public static void main( String[] args )
         {
-        // TODO test
         // creating deck
         System.out.println( "Creating Deck of Uno:" ) ;
         Deck unoDeck = new Deck() ;
@@ -216,7 +218,7 @@ public class Deck extends Pile
             }
         System.out.println( unoDeck.toString() ) ;
         System.out.println( "Reshuffling" ) ;
-        unoDeck.reshuffle();
+        unoDeck.reshuffle() ;
         System.out.println( unoDeck.toString() ) ;
 
         } // end main()

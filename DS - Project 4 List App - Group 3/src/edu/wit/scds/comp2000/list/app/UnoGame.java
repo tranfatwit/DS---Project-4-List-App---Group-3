@@ -4,7 +4,7 @@ package edu.wit.scds.comp2000.list.app;
 /**
  * 
  *
- * @author Tim Magee, Audrey Nichols, Fabio Tran
+ * @author Audrey Nichols
  * @version 1.0.0 2021-11-18 Initial implementation
  *
  */

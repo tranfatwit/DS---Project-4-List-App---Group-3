@@ -12,7 +12,7 @@ import edu.wit.scds.comp2000.list.app.card.CardType ;
 public class Hand extends Pile
     {
 
-    private final Pile hand ;
+    // private final Pile hand ;
 
     /**
      * no-arg constructor a players hand at the start of the game will always be
@@ -20,17 +20,32 @@ public class Hand extends Pile
      */
     public Hand()
         {
-        this.hand = new Pile() ;
+        super() ;
         }
 
 
     /**
-     * @return the parameter hand
+     * Receives a card and stores it in pile
+     *
+     * @param card
+     *     card to add to pile
      */
-    public Pile getHand()
+    public void receiveCard( Card card )
         {
-        return this.hand ;
-        }
+        super.addCard( card ) ;
+        } // end receiveCard()
+
+
+    /**
+     * Discards a card from the pile
+     *
+     * @param card
+     *     card to discard from pile
+     */
+    public void discardCard( Card card )
+        {
+        super.removeCard( card ) ;
+        } // end discardCard()
 
 
     /**

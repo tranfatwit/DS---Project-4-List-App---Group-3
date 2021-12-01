@@ -1,6 +1,9 @@
 
 package edu.wit.scds.comp2000.list.app ;
 
+import edu.wit.scds.comp2000.list.app.card.Card ;
+import edu.wit.scds.comp2000.list.app.card.CardColor ;
+import edu.wit.scds.comp2000.list.app.card.CardType ;
 import edu.wit.scds.comp2000.list.app.pile.Hand ;
 
 /**
@@ -72,7 +75,7 @@ public class Player
 
     /**
      * Updates player's score
-     * 
+     *
      * @param points
      *     points to add to score
      */
@@ -102,21 +105,38 @@ public class Player
         System.out.println() ;
 
         // testing getName()
+        System.out.println( "Testing getName():" ) ;
         System.out.println( String.format( "player1: %s", player1.getName() ) ) ;
         System.out.println( String.format( "player2: %s", player2.getName() ) ) ;
         System.out.println( String.format( "player3: %s", player3.getName() ) ) ;
         System.out.println() ;
 
         // testing getScore()
+        System.out.println( "Testing getScore():" ) ;
+        System.out.println( "Giving player2 10 points" ) ;
+        player2.updateScore(10);
+        System.out.println( "Giving player3 20 points" ) ;
+        player3.updateScore(20);
         System.out.println( String.format( "player1: %s", player1.getScore() ) ) ;
         System.out.println( String.format( "player2: %s", player2.getScore() ) ) ;
         System.out.println( String.format( "player3: %s", player3.getScore() ) ) ;
         System.out.println() ;
 
         // testing getHand()
-        System.out.println( String.format( "player1: %s", player1.getHand() ) ) ;
-        System.out.println( String.format( "player2: %s", player2.getHand() ) ) ;
-        System.out.println( String.format( "player3: %s", player3.getHand() ) ) ;
+        System.out.println( "Testing getHand()" ) ;
+        Card redOne = new Card( CardColor.RED, CardType.ONE ) ;
+        System.out.println( "player1 receiving redOne" ) ;
+        player1.getHand().receiveCard( redOne ) ;
+        System.out.println( "player2 receiving redOne" ) ;
+        player2.getHand().receiveCard( redOne ) ;
+        System.out.println( "player3 receiving redOne" ) ;
+        player3.getHand().receiveCard( redOne ) ;
+        System.out.println( String.format( "player1's hand: %s",
+                                           player1.getHand() ) ) ;
+        System.out.println( String.format( "player2's hand: %s",
+                                           player2.getHand() ) ) ;
+        System.out.println( String.format( "player3's hand: %s",
+                                           player3.getHand() ) ) ;
         System.out.println() ;
 
         } // end main()
