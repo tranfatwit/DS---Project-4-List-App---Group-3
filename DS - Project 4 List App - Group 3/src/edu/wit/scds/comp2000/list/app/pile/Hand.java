@@ -21,6 +21,7 @@ public class Hand extends Pile
         super() ;
         }
 
+
     /**
      * returns the hand as a string in format "[x, y, z]
      */
@@ -35,6 +36,7 @@ public class Hand extends Pile
         return ret + this.pile.get( this.pile.size() - 1 ) + "]" ;
 
         }
+
 
     /**
      * used for testing
