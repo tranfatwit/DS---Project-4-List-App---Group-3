@@ -69,7 +69,17 @@ public class Pile
 
 
     /**
-     * Unspecified removal of card from the pile used only by deck class 
+     * Removes all cards in pile
+     */
+    public void clear()
+        {
+        this.pile.clear() ;
+
+        } // end clear()
+
+
+    /**
+     * Unspecified removal of card from the pile used only by deck class
      *
      * @return card removed
      */

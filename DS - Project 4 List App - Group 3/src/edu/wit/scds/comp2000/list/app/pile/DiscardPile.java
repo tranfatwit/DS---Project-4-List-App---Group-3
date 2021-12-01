@@ -59,6 +59,18 @@ public class DiscardPile extends Pile
         } // end discardCard()
 
 
+    /**
+     * Removes all cards in pile and sets last played to null
+     */
+    @Override
+    public void clear()
+        {
+        super.clear() ;
+        this.lastPlayed = null ;
+
+        } // end clear()
+
+
     /*
      * (non-Javadoc)
      * @see java.lang.Object#toString()

@@ -5,6 +5,8 @@ import edu.wit.scds.comp2000.list.app.card.Card ;
 import edu.wit.scds.comp2000.list.app.card.CardColor ;
 import edu.wit.scds.comp2000.list.app.card.CardType ;
 
+import java.util.List ;
+
 /**
  * @author Tim Magee
  * @version 1.0.0 2021-11-30 Initial implementation
@@ -19,6 +21,16 @@ public class Hand extends Pile
     public Hand()
         {
         super() ;
+        }
+
+
+    /**
+     * @return array-list
+     */
+    public List<Card> getPile()
+        {
+        return super.pile ;
+
         }
 
 
