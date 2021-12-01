@@ -35,15 +35,15 @@ public class Hand extends Pile
 
 
     /**
-     * Discards a card from the pile
+     * Removes a card that is played by the player from the hand pile
      *
      * @param card
-     *     card to discard from pile
+     *     card to be removed from hand pile
      */
-    public void discardCard( Card card )
+    public void playCard( Card card )
         {
         super.removeCard( card ) ;
-        } // end discardCard()
+        } // end playCard()
 
 
     /**

@@ -93,13 +93,13 @@ public class Deck extends Pile
 
 
     /**
-     * Sends a card to the discard pile
+     * Discards a card to the discard pile
      */
-    public void sendToDiscardPile( Card card )
+    public void discardCard( Card card )
         {
         this.discardPile.push( card ) ;
 
-        } // end sendToDiscardPile()
+        } // end discardCard()
 
 
     /**
@@ -186,10 +186,10 @@ public class Deck extends Pile
         System.out.println( "Testing discard():" ) ;
         Card card1 = unoDeck.deal() ;
         System.out.println( "Discarding" ) ;
-        unoDeck.discard( card1 ) ;
+        unoDeck.discardCard( card1 ) ;
         Card card2 = unoDeck.deal() ;
         System.out.println( "Discarding" ) ;
-        unoDeck.discard( card2 ) ;
+        unoDeck.discardCard( card2 ) ;
         System.out.println( String.format( "Last played: %s",
                                            unoDeck.lastPlayed() ) ) ;
         System.out.println( String.format( "# of cards discarded: %s",
@@ -200,7 +200,7 @@ public class Deck extends Pile
         System.out.println( "Testing lastPlayed():" ) ;
         Card card3 = unoDeck.deal() ;
         System.out.println( String.format( "Discarding %s", card3.toString() ) ) ;
-        unoDeck.discard( card3 ) ;
+        unoDeck.discardCard( card3 ) ;
         System.out.println( String.format( "Last played: %s",
                                            unoDeck.lastPlayed() ) ) ;
         System.out.println() ;
@@ -210,7 +210,7 @@ public class Deck extends Pile
         System.out.println( "Emptying deck" ) ;
         while ( !unoDeck.pile.isEmpty() )
             {
-            unoDeck.discard( unoDeck.deal() ) ;
+            unoDeck.discardCard( unoDeck.deal() ) ;
             }
         System.out.println( unoDeck.toString() ) ;
         System.out.println( "Reshuffling" ) ;
