@@ -97,8 +97,8 @@ public class Deck extends Pile
         {
         // stores last played and removes it so it doesn't get shuffle back into deck
         Card lastPlayed = discardPile.getLastPlayed() ;
-        discardPile.removeCard(lastPlayed);
-    
+        discardPile.removeCard( lastPlayed ) ;
+
         // adds each card from discard pile back into the deck
         while ( !discardPile.pile.isEmpty() )
             {
@@ -166,7 +166,7 @@ public class Deck extends Pile
         System.out.println( "Testing reshuffle():" ) ;
         System.out.println( "Creating Discard Pile" ) ;
         DiscardPile discardPile = new DiscardPile() ;
-        
+
         System.out.println( "Emptying deck" ) ;
         while ( !unoDeck.pile.isEmpty() )
             {
@@ -178,6 +178,8 @@ public class Deck extends Pile
         System.out.println( discardPile.toString() ) ;
         System.out.println( String.format( "Number of cards in discard pile: %s",
                                            discardPile.pile.size() ) ) ;
+        System.out.println( String.format( "Last played card: %s",
+                                           discardPile.getLastPlayed() ) ) ;
         System.out.println( "Reshuffling" ) ;
         unoDeck.reshuffle( discardPile ) ;
         System.out.println( unoDeck.toString() ) ;
@@ -186,6 +188,8 @@ public class Deck extends Pile
         System.out.println( discardPile.toString() ) ;
         System.out.println( String.format( "Number of cards in discard pile: %s",
                                            discardPile.pile.size() ) ) ;
+        System.out.println( String.format( "Last played card: %s",
+                                           discardPile.getLastPlayed() ) ) ;
 
         } // end main()
 
