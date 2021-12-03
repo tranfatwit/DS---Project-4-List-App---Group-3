@@ -59,6 +59,18 @@ public class Pile
 
 
     /**
+     * Unspecified removal of card from the pile
+     *
+     * @return card removed
+     */
+    public Card removeCard()
+        {
+        return this.pile.remove( 0 ) ;
+
+        } // end removeCard()
+
+
+    /**
      * Shuffles pile of cards
      */
     public void shuffle()
@@ -79,15 +91,15 @@ public class Pile
 
 
     /**
-     * Unspecified removal of card from the pile used only by deck class
+     * Checks if pile is empty
      *
-     * @return card removed
+     * @return true if empty, false if not
      */
-    protected Card removeCard()
+    public boolean isEmpty()
         {
-        return this.pile.remove( 0 ) ;
+        return this.pile.size() == 0 ;
 
-        } // end remove()
+        } // end isEmpty()
 
 
     /**

@@ -6,7 +6,6 @@ import edu.wit.scds.comp2000.list.app.card.CardColor ;
 import edu.wit.scds.comp2000.list.app.card.CardType ;
 import edu.wit.scds.comp2000.list.app.pile.Deck ;
 import edu.wit.scds.comp2000.list.app.pile.DiscardPile ;
-import edu.wit.scds.comp2000.list.app.pile.Hand ;
 
 import java.util.ArrayList ;
 import java.util.Collections ;
@@ -22,25 +21,23 @@ import java.util.Scanner ;
 public class UnoGame
     {
 
-    /**
-     * @param args
-     */
-
     private static List<Player> players = new ArrayList<>() ;
     private static Deck unoDeck = new Deck() ;
     private static DiscardPile discardPile = new DiscardPile() ;
     private static Player currentPlayer ;
     private static int numPlayers ;
-    private static int playerTurn ;
     private static boolean turnOrder = true ;
     private static CardColor lastWildColor ;
 
     private static boolean gameOver = false ;
-    private static String winner ;
+    private static Player winner ;
 
     private static boolean cardActive = true ;
     private static boolean handsFull = true ;
 
+    /**
+     * @param args
+     */
     public static void main( final String[] args )
         {
         Scanner search = new Scanner( System.in ) ;
@@ -108,12 +105,15 @@ public class UnoGame
             {
             newCard = unoDeck.deal() ;
             currentPlayer.getHand().addCard( newCard ) ;
+            System.out.println( String.format( "%s, your hand contains the following cards: %s",
+                                               currentPlayer.getName(),
+                                               currentPlayer.getHand() ) ) ;
             }
         }
 
 
     /*
-     * Asks user for number of players, if too high or too low, user is reprompted.
+     * Asks user for number of players, if too high or too low, user is re-prompted.
      * Once valid number of players is given, players may input their names.
      */
     public static void getPlayers( Scanner search )
@@ -147,14 +147,35 @@ public class UnoGame
         }
 
 
+    /**
+     * Return cards from players hand and discard pile back to deck
+     */
+    public static void returnCardsToDeck()
+        {
+        // returns cards from each players hand to deck
+        for ( Player player : players )
+            {
+            while ( !player.getHand().isEmpty() )
+                {
+                unoDeck.addCard( player.getHand().removeCard() ) ;
+                }
+
+            }
+        // returns discard pile back to deck
+        while ( !discardPile.isEmpty() )
+            {
+            unoDeck.addCard( discardPile.removeCard() ) ;
+            }
+
+        }
+
+
     /*
      * Player turns occur until one player has no cards in hand
      */
     public static void round( Scanner search )
         {
         Card discard = discardPile.getLastPlayed() ;
-
-        playerTurn = 1 ;
 
         while ( handsFull )
             {
@@ -171,57 +192,29 @@ public class UnoGame
      * Checks a players hands to see if there are any compatible cards, if not they
      * draw a card
      */
-    public static void checkCards( Hand hand,
-                                   Card lastPlayed )
+    public static boolean checkCards( Card card,
+                                      Card lastPlayed )
         {
 
-        // TODO modify
-        
-        // guideline notes:
-
-        // change parameter to Card card, Card lastPlayed
-
-        // Card card will be whatever player.playCard ( index # player enters in
-        // console ) returns
-
-        // Outcomes:
-        // if the check is true, return true, if not return false
-        // whatever method that calls checkCards will be in a while loop, getting a
-        // return of true will break the loop and perform player.removeCard ()
-        // return of false will continue that loop to continue and check other cards
-
-        // whatever method that calls checkCards should probably store
-        // player.playCard in case checkCards returns true, we can use that variable
-        // to player.removeCard( card )
-
-        // in play() method, add an if statement
-        // that checks if whatever the player enters signifies they need to draw, if
-        // so perform the draw, and then call checkCards again
-
-        int size = hand.getPile().size() ;
         boolean usefulCard = false ;
 
-        while ( !usefulCard )
+        if ( ( lastPlayed.getType() == card.getType() ) ||
+             ( lastPlayed.getColor() == card.getColor() ) )
             {
-            for ( int i = 0 ; i < size ; i++ )
-                {
-                if ( ( lastPlayed.getType() == hand.getPile().get( i ).getType() ) ||
-                     ( lastPlayed.getColor() ==
-                       hand.getPile().get( i ).getColor() ) )
-                    {
-                    usefulCard = true ;
-                    }
-                }
-            if ( !usefulCard )
-                {
-                System.out.println( "You have no useful cards, and will have to draw one." ) ;
-                draw( 1 ) ;
-                System.out.println( String.format( "Your new hand contains the following cards: %s.",
-                                                   hand ) ) ;
-                size++ ;
-                }
+            usefulCard = true ;
+            } // end if
+        if ( ( card.getType() == CardType.WILD ) ||
+             ( card.getColor() == CardColor.WILD ) )
+            {
+            usefulCard = true ;
+            } // end if
 
-            }
+        if ( !usefulCard )
+            {
+            System.out.println( "If you have no useful cards, you will have to draw one." ) ;
+            } // end if
+
+        return usefulCard ;
         }
 
 
@@ -230,6 +223,14 @@ public class UnoGame
 
         for ( Player player : players )
             {
+            if ( player.getHand().isEmpty() )
+                {
+                System.out.println( String.format( "Congratulations, %s has won this round. ",
+                                                   player.getName() ) ) ;
+                int points = calculatePoints() ;
+                player.updateScore( points ) ;
+                break ;
+                }
 
             }
 
@@ -241,8 +242,7 @@ public class UnoGame
         Player tempPlayer = currentPlayer ;
         int currentTurn = players.indexOf( tempPlayer ) ;
 
-        currentPlayer = players.get( currentTurn + 1 ) ;
-
+        currentPlayer = players.get( ( currentTurn + 1 ) % 2 ) ;
         }
 
 
@@ -264,6 +264,7 @@ public class UnoGame
                 {
                 System.out.println( "You draw four cards, and your turn is over." ) ;
                 draw( 4 ) ;
+                cardActive = false ;
                 } // end if
             else
                 {
@@ -278,6 +279,7 @@ public class UnoGame
                 {
                 System.out.println( "You draw two cards, and your turn is over." ) ;
                 draw( 2 ) ;
+                cardActive = false ;
                 } // end if
             else
                 {
@@ -291,6 +293,7 @@ public class UnoGame
             if ( cardActive )
                 {
                 System.out.println( "Your turn has been skipped." ) ;
+                cardActive = false ;
                 } // end if
 
             // next turn
@@ -298,7 +301,7 @@ public class UnoGame
         else if ( lastCard.getType() == CardType.WILD )
             {
             System.out.println( String.format( "This wild card has been given the color %s.",
-                                               lastCard.getType() ) ) ;
+                                               lastWildColor ) ) ;
 
             play( lastCard, search ) ;
 
@@ -309,7 +312,10 @@ public class UnoGame
             if ( cardActive )
                 {
                 Collections.reverse( players ) ;
-                System.out.println( "The current player is now " ) ;
+                nextPlayer() ;
+                System.out.println( String.format( "The current player is now %s.",
+                                                   currentPlayer.getName() ) ) ;
+                cardActive = false ;
                 } // end if
             else
                 {
@@ -338,7 +344,7 @@ public class UnoGame
             if ( name.getScore() >= 500 )
                 {
                 gameOver = true ;
-                winner = name.getName() ;
+                winner = name ;
                 break ;
                 } // end if
             else
@@ -351,56 +357,70 @@ public class UnoGame
         } // end checkPoints
 
 
+    public static int calculatePoints()
+        {
+        // TODO implement
+        int total = 0 ;
+        for ( Player player : players )
+            {
+
+            if ( player == winner )
+                {
+                continue ;
+
+                }
+            else
+                {
+                total = total + player.getHand().getPointTotal() ;
+
+                }
+
+            }
+
+        return total ;
+
+        }
+
+
     public static void play( Card discard,
                              Scanner search )
         {
         int color ;
-        int choice ;
+        String entry ;
         Card testCard = null ;
         boolean validChoice = false ;
 
-        // TODO check if player needs to draw
-
-        checkCards( currentPlayer.getHand(), discard ) ;
-
-        System.out.println( "You must play a card that matches the color or type of the last card played." ) ;
-        System.out.println( "What card do you want to play from your hand? Please give the index of the card." ) ;
-
-        choice = search.nextInt() ;
-
-        while ( validChoice == false )
+        while ( !validChoice )
             {
-            testCard = currentPlayer.getHand().getPile().get( choice - 1 ) ;
+            System.out.println( "You must play a card that matches the color or type of the last card played." ) ;
+            System.out.println( "What card do you want to play from your hand? Please give the index of the card." ) ;
+            System.out.println( "Or if you would like to draw, type D." ) ;
 
-            if ( ( testCard.getColor() == discard.getColor() ) ||
-                 ( testCard.getType() == discard.getType() ) )
+            entry = search.next() ;
+
+            if ( entry.equals( "D" ) )
                 {
-                validChoice = true ;
-
-                currentPlayer.getHand().removeCard( testCard ) ;
-                discardPile.addCard( testCard ) ;
-
-                cardActive = true ;
-                } // end if
-            else if ( ( testCard.getType() == CardType.WILD ) ||
-                      ( testCard.getType() == CardType.WILD_DRAW_FOUR ) )
-                {
-                validChoice = true ;
-
-                currentPlayer.getHand().removeCard( testCard ) ;
-                discardPile.addCard( testCard ) ;
-
-                cardActive = true ;
+                draw( 1 ) ;
+                // TODO tell the player what card they drew
+                continue ;
                 }
             else
                 {
-                System.out.println( "You must play a card that matches the color or type of the last card played." ) ;
+                int index = Integer.parseInt( entry ) ;
+                testCard = currentPlayer.getHand().getCard( index - 1 ) ;
+                validChoice = checkCards( testCard, discard ) ;
+                }
+            if ( !validChoice )
+                {
                 System.out.println( "Please try again with a new index." ) ;
+                }
 
-                choice = search.nextInt() ;
-                } // end else
+            }
 
-            } // end while
+        currentPlayer.playCard( testCard ) ;
+        discardPile.addCard( testCard ) ;
+
+        cardActive = true ;
 
         System.out.println( String.format( "You have chosen to play %s.",
                                            testCard ) ) ;
@@ -446,9 +466,10 @@ public class UnoGame
      */
     public static void newRound()
         {
-        // TODO clear player hands
         checkPoints() ;
+        returnCardsToDeck() ; // return player cards to deck
         initializeGame() ;
+
         } // end method newRound
 
     }

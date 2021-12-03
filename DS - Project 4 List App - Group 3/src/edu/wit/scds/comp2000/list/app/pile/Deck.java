@@ -100,7 +100,7 @@ public class Deck extends Pile
         discardPile.removeCard( lastPlayed ) ;
 
         // adds each card from discard pile back into the deck
-        while ( !discardPile.pile.isEmpty() )
+        while ( !discardPile.isEmpty() )
             {
             super.pile.add( discardPile.removeCard() ) ;
             } // end while

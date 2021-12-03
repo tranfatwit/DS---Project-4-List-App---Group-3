@@ -87,15 +87,12 @@ public class Player
 
 
     /**
-     * Returns a card from the player's hand
+     * Removes a card from the player's hand
      *
-     * @param index
-     *     of hand's array-list pile
-     * @return card
      */
-    public Card playCard( int index )
+    public void playCard( Card card )
         {
-        return getHand().getCard( index ) ;
+        this.getHand().removeCard( card ) ;
 
         } // end playCard()
 
