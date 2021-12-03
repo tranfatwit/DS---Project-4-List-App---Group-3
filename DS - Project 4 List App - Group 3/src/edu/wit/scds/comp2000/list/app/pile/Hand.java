@@ -25,6 +25,21 @@ public class Hand extends Pile
 
 
     /**
+     * Returns card at a given index in pile
+     *
+     * @param index
+     *     index of card in array-list
+     * @return card
+     */
+    public Card getCard( int index )
+        {
+        return super.pile.get( index ) ;
+        
+        } // end getCard()
+
+
+    // TODO remove getPile()
+    /**
      * @return array-list
      */
     public List<Card> getPile()

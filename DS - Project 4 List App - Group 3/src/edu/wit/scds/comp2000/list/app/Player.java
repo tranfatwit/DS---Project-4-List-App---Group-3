@@ -87,6 +87,20 @@ public class Player
 
 
     /**
+     * Returns a card from the player's hand
+     *
+     * @param index
+     *     of hand's array-list pile
+     * @return card
+     */
+    public Card playCard( int index )
+        {
+        return getHand().getCard( index ) ;
+
+        } // end playCard()
+
+
+    /**
      * Used for testing
      *
      * @param args
@@ -114,9 +128,9 @@ public class Player
         // testing getScore()
         System.out.println( "Testing getScore():" ) ;
         System.out.println( "Giving player2 10 points" ) ;
-        player2.updateScore(10);
+        player2.updateScore( 10 ) ;
         System.out.println( "Giving player3 20 points" ) ;
-        player3.updateScore(20);
+        player3.updateScore( 20 ) ;
         System.out.println( String.format( "player1: %s", player1.getScore() ) ) ;
         System.out.println( String.format( "player2: %s", player2.getScore() ) ) ;
         System.out.println( String.format( "player3: %s", player3.getScore() ) ) ;
