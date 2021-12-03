@@ -2,9 +2,12 @@
 package edu.wit.scds.comp2000.list.app ;
 
 import edu.wit.scds.comp2000.list.app.card.Card ;
+import edu.wit.scds.comp2000.list.app.card.CardColor;
 import edu.wit.scds.comp2000.list.app.card.CardType ;
 import edu.wit.scds.comp2000.list.app.pile.Deck ;
 import edu.wit.scds.comp2000.list.app.pile.DiscardPile ;
+import edu.wit.scds.comp2000.list.app.pile.Hand;
+import edu.wit.scds.comp2000.list.app.pile.Pile;
 
 import java.util.ArrayList ;
 import java.util.Collections ;
@@ -31,11 +34,13 @@ public class UnoGame
     private static int numPlayers ;
     private static int playerTurn ;
     private static boolean turnOrder = true ;
+    private static CardColor lastWildColor ;
     
     private static boolean gameOver = false ;
     private static String winner ;
 
     private static boolean cardActive = true ;
+    private static boolean handsFull = true ;
 
     public static void main( final String[] args )
         {
@@ -66,6 +71,9 @@ public class UnoGame
     public static void initializeGame()
         {
         Card playerCard ;
+        
+        // shuffles deck
+        unoDeck.shuffle();
 
         for ( int i = 0 ; i < 7 ; i++ )
             {
@@ -76,9 +84,7 @@ public class UnoGame
                 } // end for
             } // end for
 
-        // shuffles deck
-        unoDeck.shuffle();
-        
+        // discards first card of game        
         Card firstDiscard = unoDeck.deal() ;
         discardPile.addCard( firstDiscard );
         } // end initializeGame
@@ -148,24 +154,80 @@ public class UnoGame
     public static void round( Scanner search )
         {
         Card discard = discardPile.getLastPlayed() ;
-        boolean handsFull = true ;
+        
 
         playerTurn = 1 ;
 
         while ( handsFull )
             {
-            turn( currentPlayer, discard, search ) ;
-            // check hands to see if round is over
-            // currentPlayer goes to next player
+            turn( currentPlayer, search ) ;
+            nextPlayer() ;
+            checkHands();
+            discard = discardPile.getLastPlayed() ;
             }
 
         }
+    
+    
+    /*
+     * Checks a players hands to see if there are any compatible cards, if not they draw a card
+     */
+    public static void checkCards( Hand hand, 
+                                    Card lastPlayed)
+    {
+        int size = hand.getPile().size() ;
+        boolean usefulCard = false ;
+        
+        
+        
+        
+        while ( !usefulCard )
+        {
+            for ( int i = 0; i < size; i++ )
+            {
+                if ( lastPlayed.getType() == hand.getPile().get(i).getType() ||
+                        lastPlayed.getColor() == hand.getPile().get(i).getColor())
+                {
+                    usefulCard = true ;
+                }
+            }
+            if ( !usefulCard )
+            {
+                System.out.println( "You have no useful cards, and will have to draw one." ) ;
+                draw(1) ;
+                System.out.println( String.format( "Your new hand contains the following cards: %s.", hand ) ) ;
+                size++ ;
+            }
+            
+        }
+    }
+    
+    public static void checkHands() 
+    {
+        
+        for ( Player player : players )
+        {
+            
+            
+        }
+        
+    }
+    
+    public static void nextPlayer()
+    {
+        Player tempPlayer = currentPlayer ;
+        int currentTurn = players.indexOf( tempPlayer ) ;
+        
+        currentPlayer = players.get( currentTurn + 1 ) ;
+
+    }
 
 
     public static void turn( Player player,
-                             Card lastCard,
                              Scanner search )
         {
+        
+        Card lastCard = discardPile.getLastPlayed() ;
 
         System.out.println( String.format( "%s, your hand contains the following cards: %s",
                                            player.getName(),
@@ -227,7 +289,7 @@ public class UnoGame
                 System.out.println( "The current player is now " ) ;
                 } // end if
             else
-                {
+                { 
                 play( lastCard, search ) ;
                 }
 
@@ -273,6 +335,8 @@ public class UnoGame
         int choice ;
         Card testCard = null ;
         boolean validChoice = false ;
+        
+        checkCards( currentPlayer.getHand(), discard ) ;
 
         System.out.println( "You must play a card that matches the color or type of the last card played." ) ;
         System.out.println( "What card do you want to play from your hand? Please give the index of the card." ) ;
@@ -287,12 +351,22 @@ public class UnoGame
                  ( testCard.getType() == discard.getType() ) )
                 {
                 validChoice = true ;
+                
+                currentPlayer.getHand().removeCard( testCard ) ;
+                discardPile.addCard( testCard );
 
+                cardActive = true ;                
+                } // end if
+            else if ( ( testCard.getType() == CardType.WILD ) ||
+                    ( testCard.getType() == CardType.WILD_DRAW_FOUR ) )
+            {
+                validChoice = true ;
+                
                 currentPlayer.getHand().removeCard( testCard ) ;
                 discardPile.addCard( testCard );
 
                 cardActive = true ;
-                } // end if
+            }
             else
                 {
                 System.out.println( "You must play a card that matches the color or type of the last card played." ) ;
@@ -319,8 +393,23 @@ public class UnoGame
                 System.out.println( "Please try again." ) ;
                 color = search.nextInt() ;
                 }
+            else if ( ( color == 1) )
+            {
+                lastWildColor = CardColor.RED ;
+            }
+            else if ( ( color == 2) )
+            {
+                lastWildColor = CardColor.YELLOW ;
+            }
+            else if ( ( color == 3) )
+            {
+                lastWildColor = CardColor.GREEN ;
+            }
+            else
+            {
+                lastWildColor = CardColor.BLUE ;
+            }
 
-            // TODO change card color to this color??
             }
 
         } // end method play
